@@ -1,0 +1,54 @@
+* examples
+** Basic test without testify
+
+#+begin_src go-test
+func TestBasic(t *testing.T) {
+    result := 2 + 2
+    if result != 4 {
+        t.Errorf("Expected 4, got %d", result)
+    }
+}
+#+end_src
+
+#+RESULTS:
+#+begin_src
+ok  	test	0.001s
+#+end_src
+
+** Test with testify/assert
+#+begin_src go-test
+import "github.com/stretchr/testify/assert"
+
+func TestWithAssert(t *testing.T) {
+    result := 2 + 2
+    assert.Equal(t, 4, result)
+}
+#+end_src
+
+#+RESULTS:
+#+begin_src
+ok  	test	0.002s
+#+end_src
+
+** Multiple tests with verbose output
+#+begin_src go-test :verbose t
+import "github.com/stretchr/testify/assert"
+
+func TestAdd(t *testing.T) {
+    assert.Equal(t, 4, 2+2)
+}
+
+func TestSubtract(t *testing.T) {
+    assert.Equal(t, 0, 2-2)
+}
+#+end_src
+
+#+RESULTS:
+#+begin_src
+=== RUN   TestAdd
+--- PASS: TestAdd (0.00s)
+=== RUN   TestSubtract
+--- PASS: TestSubtract (0.00s)
+PASS
+ok  	test	0.002s
+#+end_src
